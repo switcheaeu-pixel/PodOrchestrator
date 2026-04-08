@@ -1,0 +1,11 @@
+{
+  "builds": [
+    { "src": "frontend/package.json", "use": "@vercel/next" },
+    { "src": "backend/", "use": "@vercel/python" },
+    { "src": "ai-services/", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "backend/main.py" },
+    { "src": "/ai/(.*)", "dest": "ai-services/main.py" }
+  ]
+}
