@@ -1,0 +1,402 @@
+# AI Provider Configuration
+# Italian Market Focus
+
+providers:
+  # Text Generation Providers
+  openai:
+    enabled: true
+    api_key_env: OPENAI_API_KEY
+    models:
+      gpt-4:
+        cost_per_1k_input: 0.03
+        cost_per_1k_output: 0.06
+        max_tokens: 8192
+        italian_support: good
+      gpt-4-turbo:
+        cost_per_1k_input: 0.01
+        cost_per_1k_output: 0.03
+        max_tokens: 128000
+        italian_support: good
+      gpt-3.5-turbo:
+        cost_per_1k_input: 0.0005
+        cost_per_1k_output: 0.0015
+        max_tokens: 16385
+        italian_support: good
+    
+    endpoints:
+      chat_completion: https://api.openai.com/v1/chat/completions
+      embeddings: https://api.openai.com/v1/embeddings
+    
+    rate_limits:
+      requests_per_minute: 10000
+      tokens_per_minute: 1000000
+    
+    features:
+      - script_writing
+      - show_notes
+      - topic_expansion
+      - italian_content
+  
+  anthropic:
+    enabled: true
+    api_key_env: ANTHROPIC_API_KEY
+    models:
+      claude-3-opus:
+        cost_per_1k_input: 0.015
+        cost_per_1k_output: 0.075
+        max_tokens: 200000
+        italian_support: good
+      claude-3-sonnet:
+        cost_per_1k_input: 0.003
+        cost_per_1k_output: 0.015
+        max_tokens: 200000
+        italian_support: good
+    
+    endpoints:
+      messages: https://api.anthropic.com/v1/messages
+    
+    rate_limits:
+      requests_per_minute: 5000
+    
+    features:
+      - long_context
+      - reasoning
+      - script_writing
+  
+  google_ai:
+    enabled: true
+    api_key_env: GOOGLE_AI_API_KEY
+    models:
+      gemini-pro:
+        cost_per_1k_char: 0.000125
+        max_tokens: 32768
+        italian_support: good
+      gemini-pro-vision:
+        cost_per_1k_char: 0.00025
+        max_tokens: 32768
+        italian_support: good
+    
+    endpoints:
+      generate_content: https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent
+    
+    features:
+      - multimodal
+      - free_tier_available
+  
+  local_llm:
+    enabled: false  # Set to true if hosting local models
+    model_path: /models/llama-italian
+    models:
+      llama-italian:
+        cost_per_1k_tokens: 0.001  # Electricity/cloud cost
+        max_tokens: 4096
+        italian_support: excellent
+    
+    features:
+      - offline
+      - privacy
+      - italian_optimized
+      - custom_training
+
+  # Text-to-Speech Providers
+  elevenlabs:
+    enabled: true
+    api_key_env: ELEVENLABS_API_KEY
+    cost_per_1k_chars: 0.18
+    
+    italian_voices:
+      - id: italian_male_1
+        name: "Luca"
+        accent: standard
+        gender: male
+        quality: premium
+      - id: italian_female_1
+        name: "Sofia"
+        accent: northern
+        gender: female
+        quality: premium
+      - id: italian_male_business
+        name: "Marco"
+        accent: central
+        gender: male
+        quality: premium
+    
+    features:
+      - voice_cloning
+      - emotion_control
+      - italian_accents
+      - high_quality
+    
+    rate_limits:
+      characters_per_month: 10000  # Free tier
+      requests_per_minute: 100
+  
+  google_tts:
+    enabled: true
+    credentials_env: GOOGLE_CLOUD_CREDENTIALS
+    cost_per_1k_chars: 0.016
+    
+    italian_voices:
+      - name: it-IT-Standard-A
+        language_code: it-IT
+        ssml_gender: FEMALE
+      - name: it-IT-Standard-B
+        language_code: it-IT
+        ssml_gender: MALE
+      - name: it-IT-Wavenet-A
+        language_code: it-IT
+        ssml_gender: FEMALE
+        quality: premium
+    
+    features:
+      - reliable
+      - fast
+      - multiple_accents
+    
+    rate_limits:
+      characters_per_minute: 1000000
+  
+  amazon_polly:
+    enabled: true
+    aws_access_key_env: AWS_ACCESS_KEY_ID
+    aws_secret_key_env: AWS_SECRET_ACCESS_KEY
+    region: eu-south-1  # Milan
+    cost_per_1k_chars: 0.016
+    
+    italian_voices:
+      - id: Bianca
+        language_code: it-IT
+        gender: Female
+      - id: Giorgio
+        language_code: it-IT
+        gender: Male
+    
+    features:
+      - aws_integration
+      - neural_voices
+    
+    rate_limits:
+      characters_per_second: 3000
+  
+  azure_tts:
+    enabled: false  # Enable if using Azure
+    subscription_key_env: AZURE_TTS_KEY
+    region: westeurope
+    cost_per_1k_chars: 0.016
+    
+    italian_voices:
+      - name: it-IT-Elsa
+        gender: Female
+      - name: it-IT-Diego
+        gender: Male
+    
+    features:
+      - enterprise_grade
+      - custom_voices
+
+  # Transcription Providers
+  assemblyai:
+    enabled: true
+    api_key_env: ASSEMBLYAI_API_KEY
+    cost_per_second: 0.0006
+    
+    features:
+      - italian_support
+      - speaker_diarization
+      - sentiment_analysis
+      - auto_chapters
+    
+    rate_limits:
+      requests_per_minute: 1000
+  
+  rev_ai:
+    enabled: true
+    api_key_env: REV_AI_API_KEY
+    cost_per_minute: 0.02
+    
+    features:
+      - human_review_option
+      - fast_turnaround
+    
+    rate_limits:
+      requests_per_minute: 500
+  
+  whisper:
+    enabled: true
+    api_key_env: OPENAI_API_KEY  # Uses OpenAI API
+    cost_per_minute: 0.006
+    
+    features:
+      - multilingual
+      - open_source_available
+      - good_italian_support
+    
+    rate_limits:
+      requests_per_minute: 3000
+
+  # Audio Editing Providers
+  descript:
+    enabled: false  # Enable if needed
+    api_key_env: DESCRIPT_API_KEY
+    cost_per_minute: 0.10
+    
+    features:
+      - text_based_editing
+      - filler_word_removal
+      - overdub
+    
+    rate_limits:
+      requests_per_minute: 100
+  
+  adobe_podcast:
+    enabled: false  # Enable if needed
+    client_id_env: ADOBE_CLIENT_ID
+    client_secret_env: ADOBE_CLIENT_SECRET
+    cost_per_minute: 0.15
+    
+    features:
+      - noise_reduction
+      - enhancement
+      - adobe_ecosystem
+
+# Routing Configuration
+routing:
+  default_tier: standard
+  
+  tier_configs:
+    budget:
+      text_providers:
+        primary: gpt-3.5-turbo
+        fallback: local_llm
+      tts_providers:
+        primary: google_tts
+        fallback: amazon_polly
+      transcription_providers:
+        primary: whisper
+        fallback: assemblyai
+    
+    standard:
+      text_providers:
+        primary: gpt-4
+        fallback: claude-3-sonnet
+      tts_providers:
+        primary: elevenlabs
+        fallback: google_tts
+      transcription_providers:
+        primary: assemblyai
+        fallback: rev_ai
+    
+    premium:
+      text_providers:
+        primary: claude-3-opus
+        fallback: gpt-4-turbo
+      tts_providers:
+        primary: elevenlabs  # With voice cloning
+        fallback: azure_tts
+      transcription_providers:
+        primary: assemblyai  # With all features
+        fallback: rev_ai
+  
+  cost_optimization:
+    enable_caching: true
+    cache_ttl: 3600  # 1 hour
+    batch_similar_requests: true
+    use_cheaper_for_drafts: true
+  
+  fallback_strategy:
+    max_retries: 3
+    retry_delay: 2  # seconds
+    exponential_backoff: true
+    fallback_order:
+      - primary
+      - secondary
+      - budget
+      - local
+
+# Italian Language Configuration
+italian:
+  default_accent: standard
+  supported_accents:
+    - standard
+    - northern
+    - central
+    - southern
+    - tuscan
+  
+  cultural_references:
+    enable: true
+    update_frequency: weekly
+  
+  regional_expressions:
+    northern:
+      - "bella"
+      - "dai"
+      - "cio"
+    central:
+      - "amo"
+      - "raga"
+      - "daje"
+    southern:
+      - "guagliò"
+      - "figliolo"
+      - "assai"
+  
+  number_formatting:
+    thousands_separator: "."
+    decimal_separator: ","
+    currency: "€"
+  
+  date_format: "DD/MM/YYYY"
+  time_format: "24h"
+
+# Monitoring Configuration
+monitoring:
+  track_costs: true
+  alert_thresholds:
+    cost_per_user_daily: 10  # €
+    cost_per_user_monthly: 50  # €
+    error_rate: 0.1  # 10%
+    response_time_p95: 5000  # ms
+  
+  providers_to_monitor:
+    - openai
+    - elevenlabs
+    - assemblyai
+    - google_tts
+
+# Billing Integration
+billing:
+  currency: EUR
+  vat_rate: 0.22  # Italian VAT
+  
+  payment_methods:
+    - stripe
+    - paypal
+    - bank_transfer
+    - satispay
+  
+  invoice_generation:
+    enabled: true
+    template: italian
+    include_usage_breakdown: true
+  
+  credit_system:
+    enabled: true
+    free_tier_credits: 5  # €
+    rollover_unused: false
+
+# Cache Configuration
+cache:
+  enabled: true
+  redis_ttl: 86400  # 24 hours
+  
+  cacheable_responses:
+    - topic_expansion
+    - common_phrases
+    - voice_samples
+    - template_scripts
+  
+  cache_invalidation:
+    on_content_update: true
+    time_based: true
+    max_cache_size: 10000  # items
