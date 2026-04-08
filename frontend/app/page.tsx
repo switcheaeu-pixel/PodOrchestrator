@@ -1,13 +1,26 @@
-import PodcastCreator from '@/components/PodcastCreator';
-import PricingTiers from '@/components/PricingTiers';
-import FeaturesShowcase from '@/components/FeaturesShowcase';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <Header />
+      {/* Simple Header */}
+      <header className="bg-white shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
+              <span className="text-xl font-bold text-gray-900">PodOrchestrator</span>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <a href="#" className="text-gray-700 hover:text-blue-600">Home</a>
+              <a href="#" className="text-gray-700 hover:text-blue-600">Funzionalità</a>
+              <a href="#" className="text-gray-700 hover:text-blue-600">Prezzi</a>
+              <a href="#" className="text-gray-700 hover:text-blue-600">Login</a>
+            </nav>
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+              Inizia Gratis
+            </button>
+          </div>
+        </div>
+      </header>
       
       <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
@@ -38,13 +51,41 @@ export default function HomePage() {
             <p className="text-gray-600 mb-8">
               Crea il tuo primo podcast in italiano in pochi minuti
             </p>
-            <PodcastCreator />
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+              <div className="text-gray-500 mb-4">
+                <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+              </div>
+              <p className="text-gray-700">Podcast Creator Component - Da implementare</p>
+              <button className="mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-6 rounded-lg">
+                Avvia Creazione
+              </button>
+            </div>
           </div>
         </section>
 
         {/* Features */}
         <section className="py-16">
-          <FeaturesShowcase />
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Funzionalità Principali
+            </h2>
+            <p className="text-xl text-gray-600">
+              Tutto ciò di cui hai bisogno per creare podcast straordinari
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-lg">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-blue-600 text-2xl">{feature.icon}</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Pricing */}
@@ -57,7 +98,33 @@ export default function HomePage() {
               Scegli il piano perfetto per le tue esigenze
             </p>
           </div>
-          <PricingTiers />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {pricingTiers.map((tier, index) => (
+              <div key={index} className={`bg-white rounded-xl shadow-lg p-6 ${tier.highlight ? 'border-2 border-blue-500' : ''}`}>
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900">{tier.name}</h3>
+                  <div className="mt-4">
+                    <span className="text-4xl font-bold">{tier.price}</span>
+                    {tier.price !== 'Gratis' && <span className="text-gray-600">/mese</span>}
+                  </div>
+                  <p className="text-gray-600 mt-2">{tier.description}</p>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button className={`w-full py-3 rounded-lg font-semibold ${tier.highlight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}`}>
+                  {tier.buttonText}
+                </button>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Testimonials */}
@@ -118,10 +185,105 @@ export default function HomePage() {
         </section>
       </main>
 
-      <Footer />
+      {/* Simple Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-blue-500 rounded-lg"></div>
+                <span className="text-xl font-bold">PodOrchestrator</span>
+              </div>
+              <p className="text-gray-400">
+                La piattaforma AI per podcast italiani
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-4">Prodotto</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white">Funzionalità</a></li>
+                <li><a href="#" className="hover:text-white">Prezzi</a></li>
+                <li><a href="#" className="hover:text-white">API</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-4">Azienda</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white">Chi siamo</a></li>
+                <li><a href="#" className="hover:text-white">Blog</a></li>
+                <li><a href="#" className="hover:text-white">Lavora con noi</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-4">Supporto</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white">Documentazione</a></li>
+                <li><a href="#" className="hover:text-white">Contatti</a></li>
+                <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>© 2024 PodOrchestrator. Tutti i diritti riservati.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
+
+const features = [
+  {
+    icon: "🎙️",
+    title: "Voci Italiane Naturali",
+    description: "Voci AI che suonano come veri madrelingua italiani, con supporto per accenti regionali."
+  },
+  {
+    icon: "🤖",
+    title: "Scrittura AI in Italiano",
+    description: "Genera script per podcast in italiano perfetto, ottimizzati per l'ascolto."
+  },
+  {
+    icon: "⚡",
+    title: "Produzione Rapida",
+    description: "Crea podcast completi in minuti invece di ore. Ideale per contenuti frequenti."
+  }
+];
+
+const pricingTiers = [
+  {
+    name: "Gratuito",
+    price: "Gratis",
+    description: "Per iniziare",
+    features: ["1 podcast/mese", "Voci base italiane", "Supporto community"],
+    buttonText: "Inizia Gratis",
+    highlight: false
+  },
+  {
+    name: "Creator",
+    price: "€9,99",
+    description: "Per creator seri",
+    features: ["5 podcast/mese", "Voci premium", "Supporto email", "Nessun watermark"],
+    buttonText: "Scegli Creator",
+    highlight: true
+  },
+  {
+    name: "Pro",
+    price: "€29,99",
+    description: "Per professionisti",
+    features: ["Podcast illimitati", "Clonazione voce", "Supporto prioritario", "Analytics avanzati"],
+    buttonText: "Scegli Pro",
+    highlight: false
+  },
+  {
+    name: "Business",
+    price: "€99",
+    description: "Per aziende",
+    features: ["White-label", "API completo", "Supporto dedicato", "Personalizzazione"],
+    buttonText: "Contattaci",
+    highlight: false
+  }
+];
 
 const testimonials = [
   {
