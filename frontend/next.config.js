@@ -2,11 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  images: {
-    domains: ['localhost'],
-  },
-  // Remove standalone output for Vercel compatibility
-  // output: 'standalone', // Commented out for Vercel
+  // Remove for Vercel compatibility
+  // output: 'standalone',
 }
 
 module.exports = nextConfig
