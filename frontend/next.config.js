@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
-  // For Vercel deployment
-  output: 'standalone',
+  // Remove standalone output for Vercel compatibility
+  // output: 'standalone', // Commented out for Vercel
 }
 
 module.exports = nextConfig
