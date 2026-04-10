@@ -1,6 +1,6 @@
 {
   "builds": [
-    { "src": "frontend/package.json", "use": "@vercel/next" },
+    { "src": "frontend/out/**", "use": "@vercel/static" },
     { "src": "backend/", "use": "@vercel/python" },
     { "src": "ai-services/", "use": "@vercel/python" }
   ],
